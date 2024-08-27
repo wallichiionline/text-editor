@@ -36,9 +36,9 @@ module.exports = () => {
         theme_color: 'purple',
         starts_url: '/',
         public_path: '/',
-        icons:[
+        icons: [
           {
-            src: path.resolve('text-editor/19a-HW-Copy/Develop/client/src/images/logo.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assts', 'icons')
           }
@@ -48,7 +48,24 @@ module.exports = () => {
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ]
+            }
+          }
+        }
       ],
     },
   };
