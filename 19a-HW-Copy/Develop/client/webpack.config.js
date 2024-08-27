@@ -18,7 +18,32 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        title: 'JATE Text Editor',
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: 'JATE Text Editor',
+        short_name: 'JATE',
+        description: 'a home for your notes',
+        background_color: 'purple',
+        theme_color: 'purple',
+        starts_url: '/',
+        public_path: '/',
+        icons:[
+          {
+            src: path.resolve('text-editor/19a-HW-Copy/Develop/client/src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assts', 'icons')
+          }
+        ]
+      })
     ],
 
     module: {
